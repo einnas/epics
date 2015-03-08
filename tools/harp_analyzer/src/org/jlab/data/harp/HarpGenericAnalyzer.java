@@ -162,11 +162,13 @@ public class HarpGenericAnalyzer {
         String[] legend = new String[n_leg_entries];
         
         legend[0] = String.format("Wire         %-10s", wireName[index]);
-        legend[1] = String.format("%-12s %8.5f", "mean", 
+        legend[1] =  String.format("%-12s %8.5f", "Amplitude", 
+                harpFunc.get(index).parameter(0).value());
+        legend[2] = String.format("%-12s %8.5f", "mean", 
                 harpFunc.get(index).parameter(1).value());
-        legend[2] = String.format("%-12s %8.5f", "sigma", 
+        legend[3] = String.format("%-12s %8.5f", "sigma", 
                 harpFunc.get(index).parameter(2).value());
-        legend[3] = String.format("%-12s %8.5f", "chi2",
+        legend[4] = String.format("%-12s %8.5f", "chi2",
                 harpFunc.get(index).getChiSquare(harpData.get(index))/
                 harpFunc.get(index).getNDF(harpData.get(index))
                 );
@@ -175,39 +177,39 @@ public class HarpGenericAnalyzer {
         double pol1 = harpFunc.get(index).parameter(4).value();
         double bgr_val = pol0 + pol1*harpFunc.get(index).parameter(1).value();      // Bgr value at under the peak
         double peak_val = harpFunc.get(index).parameter(0).value();
-        legend[4] = String.format("bgr/peak    %2.3e", bgr_val/peak_val);
+        legend[5] = String.format("bgr/peak    %2.3e", bgr_val/peak_val);
                 
         if( n_wire == 3 )
         {
-            legend[5] = String.format("bgr/peak    %2.3e", bgr_val/peak_val);
+            legend[6] = String.format("bgr/peak    %2.3e", bgr_val/peak_val);
             if( harp_name.compareTo("harp_tagger") == 0 )
             {
                 if(index == 1)
                 {
-                 legend[4] = String.format("Motor pos    %8.5f", harpFunc.get(index).parameter(1).value()*Math.sqrt(2.));
+                 legend[5] = String.format("Motor pos    %8.5f", harpFunc.get(index).parameter(1).value()*Math.sqrt(2.));
                 }
                 else if(index == 2)
                 {
-                    legend[4] = String.format("Motor pos     %8.5f", harpFunc.get(index).parameter(1).value()*Math.sqrt(2.));
+                    legend[5] = String.format("Motor pos     %8.5f", harpFunc.get(index).parameter(1).value()*Math.sqrt(2.));
                 }
                 else
                 {
-                legend[4] = "";
+                legend[5] = "";
                 }
             }
             else if( harp_name.compareTo("harp_2H02A") == 0 )
             {
                 if(index == 0)
                 {
-                 legend[4] = String.format("Motor pos    %8.5f", harpFunc.get(index).parameter(1).value()*Math.sqrt(2.));
+                 legend[5] = String.format("Motor pos    %8.5f", harpFunc.get(index).parameter(1).value()*Math.sqrt(2.));
                 }
                 else if(index == 1)
                 {
-                    legend[4] = String.format("Motor pos    %8.5f", harpFunc.get(index).parameter(1).value()*Math.sqrt(2.));
+                    legend[5] = String.format("Motor pos    %8.5f", harpFunc.get(index).parameter(1).value()*Math.sqrt(2.));
                 }
                 else
                 {
-                legend[4] = "";
+                legend[5] = "";
                 }              
             }
         }
